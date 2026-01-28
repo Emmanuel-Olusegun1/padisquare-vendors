@@ -6,7 +6,13 @@ type Props = {
 
 export default function ProductCard({ name, price, image }: Props) {
   return (
-    <div className="rounded-xl bg-[#071a11] border border-white/10 overflow-hidden hover:border-primary/40 transition">
+    <div
+      className="rounded-xl bg-white dark:bg-[#071a11] 
+                 border border-black/20 dark:border-white/10 
+                 overflow-hidden hover:border-primary/40 
+                 transition-colors duration-300 hover:shadow-lg"
+    >
+      {/* Product Image */}
       <div className="h-48 overflow-hidden">
         <img
           src={image}
@@ -15,8 +21,9 @@ export default function ProductCard({ name, price, image }: Props) {
         />
       </div>
 
+      {/* Product Info */}
       <div className="p-4">
-        <h3 className="font-medium">{name}</h3>
+        <h3 className="font-medium text-black dark:text-white">{name}</h3>
         <p className="text-primary font-semibold mt-2">
           ₦{price.toLocaleString()}
         </p>

@@ -5,8 +5,6 @@ import ProductCard from "./ProductCard";
 import Pagination from "./Pagination";
 import { useDebounce } from "../lib/useDebounce";
 
-
-
 type Product = {
   id: string;
   name: string;
@@ -18,7 +16,6 @@ type Product = {
 type Props = {
   products: Product[];
 };
-
 
 const PAGE_SIZE = 6;
 
@@ -33,33 +30,22 @@ export default function ProductBrowser({ products }: Props) {
       p.name.toLowerCase().includes(debouncedQuery.toLowerCase())
     );
 
-    if (sort === "price-asc") {
-      result.sort((a, b) => a.price - b.price);
-    }
-
-    if (sort === "price-desc") {
-      result.sort((a, b) => b.price - a.price);
-    }
-
-    if (sort === "recent") {
+    if (sort === "price-asc") result.sort((a, b) => a.price - b.price);
+    if (sort === "price-desc") result.sort((a, b) => b.price - a.price);
+    if (sort === "recent")
       result.sort(
         (a, b) =>
-          new Date(b.createdAt).getTime() -
-          new Date(a.createdAt).getTime()
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
-    }
 
     return result;
-  }, [products, query, sort]);
+  }, [products, debouncedQuery, sort]);
 
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
-  const paginated = filtered.slice(
-    (page - 1) * PAGE_SIZE,
-    page * PAGE_SIZE
-  );
+  const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return (
-    <>
+    <div className="transition-colors duration-300">
       {/* SEARCH + SORT */}
       <div className="flex flex-col md:flex-row gap-4 mb-8 md:items-center md:justify-between">
         <input
@@ -70,13 +56,21 @@ export default function ProductBrowser({ products }: Props) {
             setQuery(e.target.value);
             setPage(1);
           }}
-          className="w-full md:max-w-sm rounded-lg bg-[#071a11] border border-white/10 px-4 py-2 text-sm outline-none focus:border-primary"
+          className="w-full md:max-w-sm rounded-lg border px-4 py-2 text-sm outline-none 
+                     bg-white dark:bg-[#071a11] 
+                     border-black/20 dark:border-white/20
+                     text-black dark:text-white
+                     focus:border-primary transition-colors"
         />
 
         <select
           value={sort}
           onChange={e => setSort(e.target.value)}
-          className="w-full md:w-56 rounded-lg bg-[#071a11] border border-white/10 px-4 py-2 text-sm outline-none focus:border-primary"
+          className="w-full md:w-56 rounded-lg border px-4 py-2 text-sm outline-none 
+                     bg-white dark:bg-[#071a11] 
+                     border-black/20 dark:border-white/20
+                     text-black dark:text-white
+                     focus:border-primary transition-colors"
         >
           <option value="recent">Most recent</option>
           <option value="price-asc">Price: Low → High</option>
@@ -84,42 +78,36 @@ export default function ProductBrowser({ products }: Props) {
         </select>
       </div>
 
-{/* EMPTY STATES */}
-{filtered.length === 0 ? (
-  <div className="text-center py-20 text-white/60">
-    <p className="text-lg font-medium">
-      No products found
-    </p>
-    <p className="text-sm mt-2">
-      Try adjusting your search or filters.
-    </p>
-  </div>
-) : (
-  <>
-    {/* GRID */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      {paginated.map(product => (
-        <ProductCard
-          key={product.id}
-          name={product.name}
-          price={product.price}
-          image={product.image}
-        />
-      ))}
+      {/* EMPTY STATES */}
+      {filtered.length === 0 ? (
+        <div className="text-center py-20 text-black/60 dark:text-white/60 transition-colors">
+          <p className="text-lg font-medium">No products found</p>
+          <p className="text-sm mt-2">Try adjusting your search or filters.</p>
+        </div>
+      ) : (
+        <>
+          {/* GRID */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {paginated.map(product => (
+              <ProductCard
+                key={product.id}
+                name={product.name}
+                price={product.price}
+                image={product.image}
+              />
+            ))}
+          </div>
+
+          {/* PAGINATION */}
+          {totalPages > 1 && (
+            <Pagination
+              currentPage={page}
+              totalPages={totalPages}
+              onPageChange={setPage}
+            />
+          )}
+        </>
+      )}
     </div>
-
-    {/* PAGINATION */}
-    {totalPages > 1 && (
-      <Pagination
-        currentPage={page}
-        totalPages={totalPages}
-        onPageChange={setPage}
-      />
-    )}
-  </>
-)}
-
-
-    </>
   );
 }
