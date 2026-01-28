@@ -1,34 +1,26 @@
-Padisquare – Multi-Vendor Mini Sites
+<h1>Padisquare – Multi-Vendor Mini Sites</h1>
 
 This project is a simplified implementation of Padisquare’s multi-vendor storefront system, where each vendor can have their own mini site accessible via a unique URL.
 
 The goal of this task was to demonstrate clean architecture, App Router proficiency, UI/UX thinking, and scalability considerations using modern Next.js practices.
 
-🔗 Live Routes
-
+<h2> Live Routes </h2>
 Each vendor page is accessed using dynamic routing:
 
 /site/[vendorSlug]
 
-
 Example:
-
-/site/fresh-basket
-
+<i>/site/orizon-mart</i>
 
 This simulates a multi-tenant storefront setup where each vendor has isolated content but shares the same application.
 
-🛠️ Tech Stack
+<h2>Tech Stack</h2>
+• Next.js 14+ (App Router)
+• TypeScript
+• Tailwind CSS
+• Local mock data (JSON / in-memory objects)
 
-Next.js 14+ (App Router)
-
-TypeScript
-
-Tailwind CSS
-
-Local mock data (JSON / in-memory objects)
-
-📁 Project Structure & Decisions
+<h2>Project Structure & Decisions</h2>
 app/
  ├─ layout.tsx
  ├─ site/
@@ -38,195 +30,144 @@ components/
  ├─ ProductBrowser.tsx
  ├─ ProductCard.tsx
  ├─ Pagination.tsx
- └─ SiteHeader.tsx
+ └─ VendorHero.tsx
 lib/
  ├─ data.ts
- ├─ paginate.ts
  └─ useDebounce.ts
 public/
  ├─ brand/
  ├─ vendors/
  └─ products/
 
-Why this structure?
+<h2>Why this structure?</h2>
+• App Router enforces a clear, file-based routing model.
+• Shared UI elements live in components/ for reuse.
+• Business logic (debounce, mock data) is isolated in lib/.
+• Static assets are colocated in public/ to reflect a real storefront setup.
 
-App Router enforces a clear, file-based routing model.
+<h2>Routing Strategy (Multi-Tenant Simulation)</h2>
+<b>Dynamic routing is implemented using:</b>
+<i>app/site/[vendorSlug]/page.tsx</i>
 
-Shared UI elements live in components/ for reuse.
+<h2>Why this approach?</h3>
+• Mirrors real-world SaaS multi-tenant architectures
+• Easily extendable to database-backed vendors
+• Supports vendor-specific SEO metadata
 
-Business logic (pagination, debounce, mock data) is isolated in lib/.
-
-Static assets are colocated in public/ to reflect a real storefront setup.
-
-🧭 Routing Strategy (Multi-Tenant Simulation)
-
-Dynamic routing is implemented using:
-
-app/site/[vendorSlug]/page.tsx
-
-Why this approach?
-
-Mirrors real-world SaaS multi-tenant architectures
-
-Easily extendable to database-backed vendors
-
-Supports vendor-specific SEO metadata
-
-🧠 Data Strategy
-
+<h2>Data Strategy</h2>
 Vendor and product data are sourced from local mock data.
 
-Why mock data?
+<h3>Why mock data?</h3>
+• Keeps focus on frontend architecture and UX
+• Matches the task requirement (Mock API / JSON allowed)
+• Easily replaceable with real APIs in the future
 
-Keeps focus on frontend architecture and UX
+<h2>Server vs Client Components</h2>
 
-Matches the task requirement (Mock API / JSON allowed)
+<h3>Server Components</h3>
+• Vendor page (page.tsx)
+• Vendor lookup and validation
+• SEO metadata generation
 
-Easily replaceable with real APIs in the future
+<h3>Client Components</h3>
+• Product search
+• Sorting
+• Pagination
+• Debounced input handling
 
-⚙️ Server vs Client Components
-Server Components
-
-Vendor page (page.tsx)
-
-Vendor lookup and validation
-
-SEO metadata generation
-
-Client Components
-
-Product search
-
-Sorting
-
-Pagination
-
-Debounced input handling
-
-Reasoning:
+<b> Reasoning: </b>
 Server Components are used for request-based data and rendering, while Client Components manage interactivity and state.
 
-🔍 Search, Sorting & Pagination
-Search
+<h2>Search, Sorting & Pagination</h2>
 
-Implemented using a debounced input
+<h3>Search</h3>
+• Implemented using a debounced input
+• Prevents unnecessary re-renders
+• Improves performance and UX
 
-Prevents unnecessary re-renders
+<h3>Sorting</h3>
+• Most recent
+• Price: Low → High
+• Price: High → Low
 
-Improves performance and UX
+<h3>Pagination</h3>
+• Client-side pagination with a fixed page size
+• Pagination logic separated from UI
+• Pagination controls hidden when unnecessary
 
-Sorting
+<h2> Empty, Loading & Error States</h2>
+• <b>Empty State:</b> Displayed when no products match the search query
 
-Most recent
+• <b>Vendor Not Found:</b> Handled via notFound() (Next.js default 404)
 
-Price: Low → High
-
-Price: High → Low
-
-Pagination
-
-Client-side pagination with a fixed page size
-
-Pagination logic separated from UI
-
-Pagination controls hidden when unnecessary
-
-🚫 Empty, Loading & Error States
-
-Empty State: Displayed when no products match the search query
-
-Vendor Not Found: Handled via notFound() (Next.js default 404)
-
-Pagination Edge Cases: Prevents empty pages from rendering
+• <b>Pagination Edge Cases:</b> Prevents empty pages from rendering
 
 These states were intentionally added to reflect real-world UX expectations.
 
-🎨 UI / UX Decisions
+<h2> UI / UX Decisions</h2>
+• Dark, premium color palette aligned with Padisquare branding (Checked through the official waitlist site)
+• Spacious layout with clear product hierarchy
+• Minimal UI distractions to keep focus on content
+• Fully responsive across screen sizes
 
-Dark, premium color palette aligned with Padisquare branding
+<h3>Why Tailwind CSS?</h3>
+• Rapid iteration
+• Consistent styling system
+• Easy long-term maintenance
 
-Spacious layout with clear product hierarchy
-
-Minimal UI distractions to keep focus on content
-
-Fully responsive across screen sizes
-
-Why Tailwind CSS?
-
-Rapid iteration
-
-Consistent styling system
-
-Easy long-term maintenance
-
-♻️ Caching & Revalidation
+<h2>Caching & Revalidation</h2>
 
 Vendor pages use Incremental Static Regeneration (ISR):
 
 export const revalidate = 60;
 
-Why?
+<b>Why?</b>
+• Improves performance through caching
+• Ensures data freshness
+• Matches production-grade Next.js patterns
 
-Improves performance through caching
-
-Ensures data freshness
-
-Matches production-grade Next.js patterns
-
-🌗 Dark Mode (Not Implemented)
-
+<h2>Dark Mode (Not Implemented)</h2>
 Dark mode was considered but intentionally not implemented in the final submission.
 
-Reasoning:
-
-Not required for core functionality
-
-Avoided incomplete or inconsistent UX
-
-Priority was given to routing, architecture, and data handling
+<b>Reasoning:</b>
+•Not required for core functionality
+•Avoided incomplete or inconsistent UX
+•Priority was given to routing, architecture, and data handling
 
 This decision was made deliberately to keep the solution focused and robust.
 
-📈 SEO Considerations
+<h2>SEO Considerations</h2>
+• Dynamic metadata per vendor page
+• Vendor name and hero image included in Open Graph metadata
+• Improves shareability and search engine indexing
 
-Dynamic metadata per vendor page
+<h2>Getting Started</h2>
 
-Vendor name and hero image included in Open Graph metadata
+<b>Install dependencies:</b>
+<i>npm install</i>
 
-Improves shareability and search engine indexing
+<b>Run the development server:</b>
+<i>npm run dev</i>
 
-🚀 Getting Started
+<b>Open in your browser:</b>
+<i>http://localhost:3000</i>
 
-Install dependencies:
-
-npm install
-
-
-Run the development server:
-
-npm run dev
-
-
-Open in your browser:
-
-http://localhost:3000
-
-✅ Deliverables Checklist
-✅ Multi-tenant routing (/site/[vendorSlug])
-✅ Product grid
-✅ Search, sorting, and pagination
-✅ Empty and error states
-✅ SEO metadata
-✅ Responsive UI
-✅ Clean, scalable folder structure
-✅ Documented technical decisions
+<h2>Deliverables Checklist</h2>
+• Multi-tenant routing (/site/[vendorSlug])
+• Product grid
+• Search, sorting, and pagination
+• Empty and error states
+• SEO metadata
+• Responsive UI
+• Clean, scalable folder structure
+• Documented technical decisions
 
 
 <h2>Final Note</h2>
 This project was built with clarity, scalability, and maintainability in mind.
 The architecture allows easy extension to:
 
-1. Real APIs
-2. Authentication
-3. Vendor dashboards
-4. Checkout and payments
+• Real APIs
+• Authentication
+• Vendor dashboards
+• Checkout and payments
