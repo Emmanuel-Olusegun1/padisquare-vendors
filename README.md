@@ -1,48 +1,48 @@
 <h1>Padisquare – Multi-Vendor Mini Sites</h1>
 
 This project is a simplified implementation of Padisquare’s multi-vendor storefront system, where each vendor can have their own mini site accessible via a unique URL.
-
+<br>
 The goal of this task was to demonstrate clean architecture, App Router proficiency, UI/UX thinking, and scalability considerations using modern Next.js practices.
 
 <h2> Live Routes </h2>
-Each vendor page is accessed using dynamic routing:
+Each vendor page is accessed using dynamic routing:<br>
 
-/site/[vendorSlug]
+/site/[vendorSlug]<br>
 
-Example:
+Example:<br>
 <i>/site/orizon-mart</i>
 
 This simulates a multi-tenant storefront setup where each vendor has isolated content but shares the same application.
 
 <h2>Tech Stack</h2>
-• Next.js 14+ (App Router)
-• TypeScript
-• Tailwind CSS
+• Next.js 14+ (App Router)<br>
+• TypeScript<br>
+• Tailwind CSS<br>
 • Local mock data (JSON / in-memory objects)
 
 <h2>Project Structure & Decisions</h2>
-app/
- ├─ layout.tsx
- ├─ site/
- │   └─ [vendorSlug]/
- │       └─ page.tsx
-components/
- ├─ ProductBrowser.tsx
- ├─ ProductCard.tsx
- ├─ Pagination.tsx
- └─ VendorHero.tsx
-lib/
- ├─ data.ts
- └─ useDebounce.ts
-public/
- ├─ brand/
- ├─ vendors/
- └─ products/
+app/<br>
+ ├─ layout.tsx<br>
+ ├─ site/<br>
+ │   └─ [vendorSlug]/<br>
+ │       └─ page.tsx<br>
+components/<br>
+ ├─ ProductBrowser.tsx<br>
+ ├─ ProductCard.tsx<br>
+ ├─ Pagination.tsx<br>
+ └─ VendorHero.tsx<br>
+lib/<br>
+ ├─ data.ts<br>
+ └─ useDebounce.ts<br>
+public/<br>
+ ├─ brand/<br>
+ ├─ vendors/<br>
+ └─ products/<br>
 
 <h2>Why this structure?</h2>
-• App Router enforces a clear, file-based routing model.
-• Shared UI elements live in components/ for reuse.
-• Business logic (debounce, mock data) is isolated in lib/.
+• App Router enforces a clear, file-based routing model.<br>
+• Shared UI elements live in components/ for reuse.<br>
+• Business logic (debounce, mock data) is isolated in lib/.<br>
 • Static assets are colocated in public/ to reflect a real storefront setup.
 
 <h2>Routing Strategy (Multi-Tenant Simulation)</h2>
