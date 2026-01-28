@@ -42,7 +42,7 @@ export default async function VendorPage({ params }: PageProps) {
           className="h-64 bg-cover bg-center"
           style={{ backgroundImage: `url(${vendor.heroImage})` }}
         />
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/80" />
 
         {/* Theme toggle */}
         <span className="absolute top-4 right-4 z-50">
@@ -55,7 +55,7 @@ export default async function VendorPage({ params }: PageProps) {
               <img
                 src={vendor.logo}
                 alt={vendor.name}
-                className="w-10 h-10 object-contain"
+                className="w-15 h-15 object-contain rounded-xl"
               />
             </div>
 
@@ -75,6 +75,14 @@ export default async function VendorPage({ params }: PageProps) {
         <ProductBrowser products={vendorProducts} />
       </section>
 
+
+      <footer className="py-2">
+        <div className="max-w-6xl mx-auto px-6">
+          <p className="text-center text-black/70 dark:text-white/70">
+            &copy; {new Date().getFullYear()} PadiSquare. All rights reserved.
+          </p>
+        </div>
+      </footer>
     </main>
   );
 }

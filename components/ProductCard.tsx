@@ -10,10 +10,10 @@ export default function ProductCard({ name, price, image }: Props) {
       className="rounded-xl bg-white dark:bg-[#071a11] 
                  border border-black/20 dark:border-white/10 
                  overflow-hidden hover:border-primary/40 
-                 transition-colors duration-300 hover:shadow-lg"
+                 transition-colors duration-300 hover:shadow-lg cursor-pointer"
     >
       {/* Product Image */}
-      <div className="h-48 overflow-hidden">
+      <div className="h-58 overflow-hidden">
         <img
           src={image}
           alt={name}
