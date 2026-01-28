@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { vendors, products } from "../../../lib/data";
 import ProductBrowser from "../../../components/ProductBrowser";
-import ThemeToggle from "@/components/ThemeToggle";
 
 type PageProps = {
   params: Promise<{
@@ -34,7 +33,7 @@ export default async function VendorPage({ params }: PageProps) {
   const vendorProducts = products.filter(p => p.vendorSlug === vendor.slug);
 
   return (
-    <main className="min-h-screen bg-white dark:bg-[#04100a] text-black dark:text-white transition-colors duration-300">
+    <main className="min-h-screen bg-[#04100a] text-white transition-colors duration-300">
 
       {/* HERO */}
       <section className="relative">
@@ -43,11 +42,6 @@ export default async function VendorPage({ params }: PageProps) {
           style={{ backgroundImage: `url(${vendor.heroImage})` }}
         />
         <div className="absolute inset-0 bg-black/80" />
-
-        {/* Theme toggle */}
-        <span className="absolute top-4 right-4 z-50">
-          <ThemeToggle />
-        </span>
 
         <div className="absolute inset-0 flex items-center">
           <div className="max-w-6xl mx-auto px-6 flex items-center gap-5">
@@ -78,7 +72,7 @@ export default async function VendorPage({ params }: PageProps) {
 
       <footer className="py-2">
         <div className="max-w-6xl mx-auto px-6">
-          <p className="text-center text-black/70 dark:text-white/70">
+          <p className="text-center text-white/70">
             &copy; {new Date().getFullYear()} PadiSquare. All rights reserved.
           </p>
         </div>

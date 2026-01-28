@@ -57,9 +57,9 @@ export default function ProductBrowser({ products }: Props) {
             setPage(1);
           }}
           className="w-full md:max-w-sm rounded-lg border px-4 py-2 text-sm outline-none 
-                     bg-white dark:bg-[#071a11] 
-                     border-black/20 dark:border-white/20
-                     text-black dark:text-white
+                     bg-[#071a11] 
+                     border-white/20
+                     text-white
                      focus:border-primary transition-colors"
         />
 
@@ -67,9 +67,9 @@ export default function ProductBrowser({ products }: Props) {
           value={sort}
           onChange={e => setSort(e.target.value)}
           className="w-full md:w-56 rounded-lg border px-4 py-2 text-sm outline-none 
-                     bg-white dark:bg-[#071a11] 
-                     border-black/20 dark:border-white/20
-                     text-black dark:text-white
+                     bg-[#071a11] 
+                     border-white/20
+                     text-white
                      focus:border-primary transition-colors"
         >
           <option value="recent">Most recent</option>
@@ -80,7 +80,7 @@ export default function ProductBrowser({ products }: Props) {
 
       {/* EMPTY STATES */}
       {filtered.length === 0 ? (
-        <div className="text-center py-20 text-black/60 dark:text-white/60 transition-colors">
+        <div className="text-center py-20 text-white/60 transition-colors">
           <p className="text-lg font-medium">No products found</p>
           <p className="text-sm mt-2">Try adjusting your search or filters.</p>
         </div>

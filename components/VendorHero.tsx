@@ -18,9 +18,9 @@ export default function VendorHero({ name, logo, heroImage }: Props) {
       <div className="absolute inset-0 flex items-center">
         <div className="max-w-6xl mx-auto px-6 flex items-center gap-5">
           {/* Vendor Logo */}
-          <div className="w-16 h-16 rounded-xl bg-white/10 dark:bg-black/20 
-                          border border-white/10 dark:border-white/20 
-                          flex items-center justify-center transition-colors duration-300">
+          <div className="w-16 h-16 rounded-xl bg-black/20 
+                          border border-white/20 
+                          flex items-center justify-center">
             <img
               src={logo}
               alt={name}
@@ -30,10 +30,10 @@ export default function VendorHero({ name, logo, heroImage }: Props) {
 
           {/* Vendor Info */}
           <div>
-            <h1 className="text-3xl font-semibold text-black dark:text-white transition-colors duration-300">
+            <h1 className="text-3xl font-semibold text-white">
               {name}
             </h1>
-            <p className="text-black/70 dark:text-white/70 text-sm mt-1 transition-colors duration-300">
+            <p className="text-white/70 text-sm mt-1">
               Verified seller on PadiSquare
             </p>
           </div>
